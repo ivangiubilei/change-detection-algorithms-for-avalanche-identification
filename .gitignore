@@ -1,4 +1,7 @@
 key.txt 
 quads/
+inventories/
+basemaps/
+mosaics_venv/
 .ipynb_checkpoints
 .DS_Store

@@ -57,9 +57,7 @@ session = requests.Session()
 session.auth = (API_KEY, "")
 
 
-def shapefile_to_bbox(
-    inv: Dict, target_epsg: int = 4326
-) -> Tuple[float, float, float, float]:
+def shapefile_to_bbox(inv: Dict, target_epsg: int = 4326) -> Tuple[float, float, float, float]:
     """Return bounding box from 'area' layer of GeoPackage for a given inventory."""
     gpkg_path = ANNOTATIONS_PATH / f"{inv['name']}.gpkg"
     gdf = gpd.read_file(gpkg_path, layer="area")
@@ -100,7 +98,7 @@ def merge_quads(folder: Path, tag: str):
         }
     )
 
-    with rasterio.open(output_path, "w", **out_meta) as dest:
+    with rasterio.open(output_path, "w", **out_meta, BIGTIFF='YES') as dest:
         dest.write(mosaic)
 
     for src in src_files_to_mosaic:
